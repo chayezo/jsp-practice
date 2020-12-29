@@ -221,7 +221,7 @@
                         </span>
                       </div>
   
-                        <button type="button" class="btn_next_step sign_btn_1" disabled onclick=" ">
+                        <button type="button" class="btn_next_step sign_btn_1" onclick=" ">
                           동의하고 가입하기
                         </button>
 
@@ -249,10 +249,8 @@
                           <br/>
                           아이디를 입력해주세요.
                       </h3>
-                      <div class="signup_step_box">
+                      <div class="field_signup_wrap_pwd">
                           <label for="userid" class="blind signup_step">아이디 (이메일) 입력</label>
-                          <div class="field signup_step_box">
-                            <form action="" method="POST">
                               <div class="inpbx">
                                   <input type="email" 
                                          id="userid" 
@@ -261,9 +259,11 @@
                                          autocorrect="off" 
                                          class="field_signupbox_id"
                                          required/>
-                              </div>
-                            </form>
-                          </div>
+                              <!---->
+                            </div>
+                          <p class="field_vali">
+                            <span class="signup_wrap" id="email_check"><!--msg--></span>
+                          </p>
                       </div>
 
                       <button type="submit" class="btn_next_step sign_btn_2">다음</button>
@@ -290,7 +290,7 @@
                           <br/>
                           입력해주세요.
                       </h3>
-                      <div class="signup_step_box">
+                      <div class="field_signup_wrap_pwd">
                           <label for="usernm" class="blind signup_step"></label>
                           <div class="inpbx">
                               <input rulerfocuson type="text" 
@@ -299,8 +299,11 @@
                                                   formcontrolname="usernm"/>
                               <!---->
                           </div>
+                          <p class="field_vali">
+                            <span class="signup_wrap" id="name_check"><!--msg--></span>
+                        </p>
                       </div>
-                      <div class="signup_step_box">
+                      <div class="field_signup_wrap_pwd">
                           <label for="userphnumber" class="blind signup_step"></label>
                           <div class="inpbx">
                               <input rulerfocuson type="text" 
@@ -309,6 +312,10 @@
                                                   formcontrolname="userphnumber"/>
                               <!---->
                           </div>
+
+                          <p class="field_vali">
+                            <span class="signup_wrap" id="phone_check"><!--msg--></span>
+                        </p>
                       </div>
 
                           <button type="button" class="btn_next_step sign_btn_3">다음</button>
@@ -346,10 +353,9 @@
                                                       formcontrolname="user_password"/>
                                   <!---->
                               </div>
+
                               <p class="field_vali">
-                                  <span class="signup_wrap">영문포함</span>
-                                  <span class="signup_wrap">숫자포함</span>
-                                  <span class="signup_wrap">8~20자 이내</span>
+                                  <span class="signup_wrap" id="pw_check"><!--영문포함--></span>
                               </p>
                           </div>
                           <label for="confirm_password" class="blind signup_step"></label>
@@ -361,8 +367,9 @@
                                                       formcontrolname="confirm_password"/>
                                   <!---->
                               </div>
+
                               <p class="field_vali">
-                                  <span class="signup_wrap">비밀번호 일치</span>
+                                  <span class="signup_wrap" id="pw2_check"><!--비밀번호 일치--></span>
                               </p>
                           </div>
                       </div>
@@ -602,5 +609,6 @@
   <script src="../../JS/menubar.js"></script>
   <script src="../../JS/pagesjs/member_signin_click.js"></script>
   <script src="../../JS/pagesjs/member_signin_checkbox.js"></script>
+  <script src="../../JS/pagesjs/member_signin_onvalid.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </html>
