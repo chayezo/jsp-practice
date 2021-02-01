@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> 
+    <!--그리드시스템을 위한 css파일-->
+    <link rel="stylesheet" href="/finalproject/front-end/css/bootstrap-grid.min.css">
+    <!--reboot.css 는 태그속성들이 다른 브라우저에서 호환이 가능하게끔 스타일을 맞춰주는 css파일 -->
+    <link rel="stylesheet" href="/finalproject/front-end/css/bootstrap-reboot.min.css">
+    <!--부트스트랩 기능들의 css-->
+    <link rel="stylesheet" href="/finalproject/front-end/css/bootstrap.min.css">
+
+    <title>고객센터 공지사항</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page_notiboard_sction div {
+            word-break: break-all;
+        }
+
+        .notiboard_wrap {
+            display: flex;
+            position: relative;
+            min-width: 900px;
+            max-width: 1300px;
+            margin: 40px auto 0;
+            padding: 0 50px 100px;
+        }
+
+        .article_left {
+            flex: none;
+            width: 230px;
+            padding: 0 20px 0 0;
+            box-sizing: border-box;
+            padding-top: 0;
+        }
+
+        #snb .title_snb {
+            padding: 8px 0 33px 1px;
+            font-weight: 700;
+            font-size: 30px;
+            line-height: 34px;
+            color: #333;
+            letter-spacing: -.5px;
+        }
+
+        .page_notiboard_sction h2 {
+            display: block;
+            margin-block-start: 0.83em;
+            margin-block-end: 0.83em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+
+        #snb .inner_snb {
+            border: 1px solid #f2f2f2;
+            border-bottom: 0;
+            margin-right: 20px;
+        }
+
+        .page_notiboard_sction ul {
+            list-style-type: none;
+        }
+
+        .page_notiboard_sction li {
+            display: list-item;
+            text-align: -webkit-match-parent;
+        }
+
+        #snb .list_menu li {
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        #snb .list_menu li.on a, #snb .list_menu li.on a:hover {
+            background: rgba(255, 2, 150, 0.308);
+            background-size: 6px 11px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        #snb .list_menu li a:hover {
+            background: rgba(252, 172, 221, 0.349);
+            background-size: 6px 11px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        #snb .list_menu li a {
+            display: block;
+            overflow: hidden;
+            padding: 15px 0 15px 20px;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: -.3px;
+            text-decoration: none;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* 공지사항 본문 내용 */
+        .article_right {
+            float: 1;
+        }
+
+        .notiboard_section .head_aticle .tit {
+            padding-top: 30px;
+            height: 36px;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 36px;
+            color: #333;
+            letter-spacing: -.5px;
+        }
+
+        .notiboard_section .head_aticle .tit_sub {
+            padding-left: 11px;
+            font-size: 14px;
+            color: #999;
+            line-height: 20px;
+            letter-spacing: -.3px;
+            vertical-align: 3px;
+        }
+
+        .head_aticle .tt_tbl {
+            overflow: hidden;
+            margin-top: 40px;
+            border-bottom: 4px solid #000;
+        }
+        /* 아코디언 목록 */
+        .accordion_sub {
+            display: none;
+        }
+        .tbl_notice_tit {
+            border-bottom: 1px solid #000;
+            font-weight: 700;
+        }
+
+        .tbl_notice_info, .tbl_notice_info .infoinner {
+            display: table;
+            width: 100%;
+        }
+
+        .tbl_notice_info {
+            table-layout: fixed;
+            position: relative;
+            box-sizing: border-box;
+            color: #303033;
+        }
+
+        .tbl_notice_info p {
+            display: table-cell;
+            min-height: 50px;
+            vertical-align: middle;
+            font-size: 14px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .tbl_notice_info .tbl_info_type {
+            width: 140px;
+            padding: 15px 0;
+            color: #000;
+        }
+
+        .tbl_notice_info .tbl_info_tit {
+            padding: 15px 3% 15px 0;
+            color: #000;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .tbl_notice_info .tbl_info_date {
+            width: 130px;
+            padding: 15px 1%;
+            color: #000;
+        }
+
+        .notiboard_section .accordion_title {
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        .notiboard_section .accordion_title .infoinner .tbl_info_type,
+        .notiboard_section .accordion_title .infoinner .tbl_info_date {
+            color: #5d5d5d;
+        }
+
+        .notiboard_section .accordion_title .blind {
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 1px;
+            font-size: 1px;
+            line-height: 100px;
+            white-space: nowrap;
+        }
+
+        .notiboard_wrap .active .reply_row {
+            display: block;
+        }
+
+        .notiboard_wrap .notice_wrap {
+            position: relative;
+            z-index: 1;
+            margin: -1px 0;
+            padding: 30px 30px 30px 140px;
+            background: #f8f8f8;
+            text-align: left;
+        }
+
+        .notiboard_wrap .notice_wrap p {
+            font-size: 14px;
+            color: #303033;
+            line-height: 24px;
+            text-align: left;
+            margin-bottom: -0.1em;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <section class="page_notiboard_sction">
+        <div class="notiboard_wrap">
+
+            <div class="article_left">
+                <div id="snb" class="snb_cc">
+                    <h2 class="title_snb">고객센터</h2>
+                    <div class="inner_snb">
+                        <ul class="list_menu">
+                            <li class="list_menu on">
+                                <a href="">공지사항</a>
+                            </li>
+                            <li class="list_menu">
+                                <a href="">자주하는 질문</a>
+                            </li>
+                            <li class="list_menu">
+                                <a href="">1:1 문의</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article_right">
+                <div class="notiboard_section">
+                    <div class="head_aticle">
+                        <h3 class="tit">
+                            공지사항
+                            <span class="tit_sub">
+                                읏챠피디아의 새로운 소식들과 유용한 정보들을 확인하세요.
+                            </span>
+                        </h3>
+                        <div class="tt_tbl"></div>
+                    </div>
+                    <form name="notiboard_frm" action="">
+                        <div class="accordion_banner" id="tbl_notice">
+                            <div class="tbl_notice_tit">
+                                <div class="tbl_notice_info">
+                                    <p class="tbl_info_type">번호</p>
+                                    <p class="tbl_info_tit">제목</p>
+                                    <p class="tbl_info_date">작성일</p>
+                                </div>
+                            </div>
+                            <div class="accordion_title">
+                                <div class="tbl_notice_info">
+                                    <div class="infoinner">
+                                        <p class="tbl_info_type">17
+                                            <span class="blind">번호</span>
+                                        </p>
+                                        <p class="tbl_info_tit">[공지] 개인정보 처리방침 변경 사전 안내
+                                            <span class="blind">제목</span>
+                                        </p>
+                                        <p class="tbl_info_date">2020-12-29
+                                            <span class="blind">작성일</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion_sub">
+                                <div class="reply_row">
+                                    <div class="notice_wrap">
+                                        <div>
+                                            <p>안녕하세요</p>
+                                            <p>읏챠피디아 입니다.</p>
+                                            <p>더 나은 서비스를 제공할 수 있도록 개인정보 처리방침 문서를
+                                                변경하였음을 알려드립니다.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion_title">메뉴 2번</div>
+                            <div class="accordion_sub">2번에대한 내용입니다.</div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+    <!--부트스트랩이 jquery를 사용하고있어 어떠한 js파일보다 상위에 있어야함-->
+    <script src="/finalproject/front-end/js/jquery.min.js"></script>
+    <!--부트스트랩 4버전부터 popper.js가필요함 bundle.min.js에 popper.js가 포함되어있음-->
+    <script src="/finalproject/front-end/js/bootstrap.bundle.min.js"></script>
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".accordion_banner .accordion_title").click(function() {
+            if($(this).next("div").is(":visible")){
+            $(this).next("div").slideUp("fast");
+            } else {
+                $(".accordion_banner .accordion_sub").slideUp("fast");
+                $(this).next("div").slideToggle("fast");
+            }
+        });
+    });
+</script>
+</html>
